@@ -29,9 +29,9 @@ extension AuthenticationHelper on Widget {
   Widget authenticated() {
     return Builder(
       builder: (BuildContext context) {
-        if (context.appViewModel.getState().count == 1) {
-          return const Text('Show Login Page');
-        }
+        // if (context.appViewModel.getState().count == 1) {
+        //   return const Text('Show Login Page');
+        // }
         return this;
       },
     );

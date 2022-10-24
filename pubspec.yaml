@@ -76,6 +76,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   code_builder:
+
   dart_style:
   build_runner: ^2.1.11
   built_value_generator: ^8.3.3

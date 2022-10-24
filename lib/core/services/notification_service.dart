@@ -15,4 +15,5 @@ abstract class NotificationService implements AppService {
   Stream<NotificationData> onOpen();
   Future<BuiltList<Map<String, dynamic>>> getmoviespop();
   Future<BuiltList<Map<String, dynamic>>> getmoviesupcom();
+  Future<Map<String, dynamic>> getmoviedetails(String movieId);
 }

@@ -26,8 +26,8 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkResponse(
-                  onTap: () {
-                    context
+                  onTap: () async {
+                    await context
                         .read<AppViewModel>()
                         .getcurrentmovie(index, upcommovies);
                     Navigator.push(

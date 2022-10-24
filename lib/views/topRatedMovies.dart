@@ -27,8 +27,8 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkResponse(
-                  onTap: () {
-                    context
+                  onTap: () async {
+                    await context
                         .read<AppViewModel>()
                         .getcurrentmovie(index, topmovies);
                     Navigator.push(

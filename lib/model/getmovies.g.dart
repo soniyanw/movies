@@ -57,6 +57,31 @@ class _$GetmoviesSerializer implements StructuredSerializer<Getmovies> {
             specifiedType: const FullType(
                 Map, const [const FullType(String), const FullType(dynamic)])));
     }
+    value = object.currentmoviedetails;
+    if (value != null) {
+      result
+        ..add('currentmoviedetails')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                Map, const [const FullType(String), const FullType(dynamic)])));
+    }
+    value = object.movieid;
+    if (value != null) {
+      result
+        ..add('movieid')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.castlist;
+    if (value != null) {
+      result
+        ..add('castlist')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(BuiltList, const [
+              const FullType(
+                  Map, const [const FullType(String), const FullType(dynamic)])
+            ])));
+    }
     return result;
   }
 
@@ -99,6 +124,24 @@ class _$GetmoviesSerializer implements StructuredSerializer<Getmovies> {
                 const FullType(dynamic)
               ])) as Map<String, dynamic>?;
           break;
+        case 'currentmoviedetails':
+          result.currentmoviedetails = serializers.deserialize(value,
+              specifiedType: const FullType(Map, const [
+                const FullType(String),
+                const FullType(dynamic)
+              ])) as Map<String, dynamic>?;
+          break;
+        case 'movieid':
+          result.movieid = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'castlist':
+          result.castlist.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(Map,
+                    const [const FullType(String), const FullType(dynamic)])
+              ]))! as BuiltList<Object?>);
+          break;
       }
     }
 
@@ -115,11 +158,24 @@ class _$Getmovies extends Getmovies {
   final BuiltList<Map<String, dynamic>>? upcoming;
   @override
   final Map<String, dynamic>? currentmovie;
+  @override
+  final Map<String, dynamic>? currentmoviedetails;
+  @override
+  final String? movieid;
+  @override
+  final BuiltList<Map<String, dynamic>>? castlist;
 
   factory _$Getmovies([void Function(GetmoviesBuilder)? updates]) =>
       (new GetmoviesBuilder()..update(updates))._build();
 
-  _$Getmovies._({this.popular, this.toprated, this.upcoming, this.currentmovie})
+  _$Getmovies._(
+      {this.popular,
+      this.toprated,
+      this.upcoming,
+      this.currentmovie,
+      this.currentmoviedetails,
+      this.movieid,
+      this.castlist})
       : super._();
 
   @override
@@ -136,15 +192,24 @@ class _$Getmovies extends Getmovies {
         popular == other.popular &&
         toprated == other.toprated &&
         upcoming == other.upcoming &&
-        currentmovie == other.currentmovie;
+        currentmovie == other.currentmovie &&
+        currentmoviedetails == other.currentmoviedetails &&
+        movieid == other.movieid &&
+        castlist == other.castlist;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, popular.hashCode), toprated.hashCode),
-            upcoming.hashCode),
-        currentmovie.hashCode));
+        $jc(
+            $jc(
+                $jc(
+                    $jc($jc($jc(0, popular.hashCode), toprated.hashCode),
+                        upcoming.hashCode),
+                    currentmovie.hashCode),
+                currentmoviedetails.hashCode),
+            movieid.hashCode),
+        castlist.hashCode));
   }
 
   @override
@@ -153,7 +218,10 @@ class _$Getmovies extends Getmovies {
           ..add('popular', popular)
           ..add('toprated', toprated)
           ..add('upcoming', upcoming)
-          ..add('currentmovie', currentmovie))
+          ..add('currentmovie', currentmovie)
+          ..add('currentmoviedetails', currentmoviedetails)
+          ..add('movieid', movieid)
+          ..add('castlist', castlist))
         .toString();
   }
 }
@@ -184,6 +252,21 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
   set currentmovie(Map<String, dynamic>? currentmovie) =>
       _$this._currentmovie = currentmovie;
 
+  Map<String, dynamic>? _currentmoviedetails;
+  Map<String, dynamic>? get currentmoviedetails => _$this._currentmoviedetails;
+  set currentmoviedetails(Map<String, dynamic>? currentmoviedetails) =>
+      _$this._currentmoviedetails = currentmoviedetails;
+
+  String? _movieid;
+  String? get movieid => _$this._movieid;
+  set movieid(String? movieid) => _$this._movieid = movieid;
+
+  ListBuilder<Map<String, dynamic>>? _castlist;
+  ListBuilder<Map<String, dynamic>> get castlist =>
+      _$this._castlist ??= new ListBuilder<Map<String, dynamic>>();
+  set castlist(ListBuilder<Map<String, dynamic>>? castlist) =>
+      _$this._castlist = castlist;
+
   GetmoviesBuilder();
 
   GetmoviesBuilder get _$this {
@@ -193,6 +276,9 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
       _toprated = $v.toprated?.toBuilder();
       _upcoming = $v.upcoming?.toBuilder();
       _currentmovie = $v.currentmovie;
+      _currentmoviedetails = $v.currentmoviedetails;
+      _movieid = $v.movieid;
+      _castlist = $v.castlist?.toBuilder();
       _$v = null;
     }
     return this;
@@ -220,7 +306,10 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
               popular: _popular?.build(),
               toprated: _toprated?.build(),
               upcoming: _upcoming?.build(),
-              currentmovie: currentmovie);
+              currentmovie: currentmovie,
+              currentmoviedetails: currentmoviedetails,
+              movieid: movieid,
+              castlist: _castlist?.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -230,6 +319,9 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
         _toprated?.build();
         _$failedField = 'upcoming';
         _upcoming?.build();
+
+        _$failedField = 'castlist';
+        _castlist?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'Getmovies', _$failedField, e.toString());

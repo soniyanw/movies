@@ -113,4 +113,32 @@ class NotificationServiceImpl implements NotificationService {
     });
     return output.toBuiltList();
   }
+
+  Future<Map<String, dynamic>> getmoviedetails(String movieId) async {
+    // TODO: implement getmovies
+    final String request = "https://api.themoviedb.org/3/movie/" +
+        movieId +
+        "?api_key=dd86d13e65172a24cdaed08b6ed89a54&language=en-US";
+    final http.Response response = await http.get(Uri.parse(request));
+    final Map<String, dynamic> requestmap =
+        await json.decode(response.body) as Map<String, dynamic>;
+    return requestmap;
+  }
+
+  Future<BuiltList<Map<String, dynamic>>> getcastdetails(String movieId) async {
+    // TODO: implement getmovies
+    final String request = "https://api.themoviedb.org/3/movie/" +
+        movieId.toString() +
+        "/credits?api_key=dd86d13e65172a24cdaed08b6ed89a54&language=en-US";
+    final http.Response response = await http.get(Uri.parse(request));
+    final Map<String, dynamic> requestmap =
+        await json.decode(response.body) as Map<String, dynamic>;
+    print(requestmap);
+    List<dynamic> casts = requestmap["cast"];
+    final List<Map<String, dynamic>> castlist = [];
+    casts.forEach((element) async {
+      castlist.add(Map.from(element as Map<String, dynamic>));
+    });
+    return castlist.toBuiltList();
+  }
 }

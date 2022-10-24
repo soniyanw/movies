@@ -6,4 +6,5 @@ abstract class AppService {
   Future<void> dispose();
   Future<BuiltList<Map<String, dynamic>>> getmoviesupcom();
   Future<BuiltList<Map<String, dynamic>>> getmoviespop();
+  Future<Map<String, dynamic>> getmoviedetails(String movieId);
 }

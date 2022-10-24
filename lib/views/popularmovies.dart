@@ -27,8 +27,8 @@ class _PopularMoviesState extends State<PopularMovies> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkResponse(
-                  onTap: () {
-                    context
+                  onTap: () async {
+                    await context
                         .read<AppViewModel>()
                         .getcurrentmovie(index, popmovies);
                     Navigator.push(

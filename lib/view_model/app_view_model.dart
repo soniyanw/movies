@@ -54,8 +54,17 @@ class AppViewModel extends AppStateNotifier<Getmovies>
     });
   }
 
-  void getcurrentmovie(int index, BuiltList? movielist) {
-    state = state.rebuild(
-        (p0) => p0.currentmovie = (movielist![index]) as Map<String, dynamic>);
+  Future<void> getcurrentmovie(int index, BuiltList? movielist) async {
+    NotificationServiceImpl imp = NotificationServiceImpl();
+    Map<String, dynamic> a =
+        await imp.getmoviedetails((movielist![index]["id"]).toString());
+    BuiltList<Map<String, dynamic>>? b =
+        await imp.getcastdetails((movielist[index]["id"]).toString());
+    state = state.rebuild((p0) {
+      p0.currentmovie = (movielist[index]) as Map<String, dynamic>;
+      p0.movieid = (movielist[index]["id"]).toString();
+      p0.currentmoviedetails = a;
+      p0.castlist = b.toBuilder();
+    });
   }
 }

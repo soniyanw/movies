@@ -26,6 +26,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
             const FullType(
                 Map, const [const FullType(String), const FullType(dynamic)])
           ]),
+          () => new ListBuilder<Map<String, dynamic>>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(
+                Map, const [const FullType(String), const FullType(dynamic)])
+          ]),
           () => new ListBuilder<Map<String, dynamic>>()))
     .build();
 

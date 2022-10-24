@@ -22,8 +22,59 @@ class _OpenMoviesState extends State<OpenMovies> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.amber[800],
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextUsed(moviedetails!["release_date"]),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.amber[800],
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextUsed(
+                                moviedetails!["vote_average"].toString()),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      moviedetails["original_title"],
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                  ],
+                ),
+              ),
               height: 300,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
                     image: NetworkImage("https://image.tmdb.org/t/p/w500" +
                         moviedetails!["backdrop_path"].toString()),
@@ -58,6 +109,10 @@ class _OpenMoviesState extends State<OpenMovies> {
             )
           ],
         ),
+      ),
+      floatingActionButton: MaterialButton(
+        onPressed: () {},
+        child: Text("Book Tickets"),
       ),
     );
   }

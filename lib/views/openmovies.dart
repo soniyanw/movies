@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movies/ui.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/widgets/aboutmovie.dart';
+import 'package:movies/views/widgets/bookbutton.dart';
 import 'package:movies/views/widgets/cast.dart';
 import 'package:provider/provider.dart';
 
@@ -66,7 +67,7 @@ class _OpenMoviesState extends State<OpenMovies> {
                       height: 16,
                     ),
                     Text(
-                      moviedetails["original_title"],
+                      moviedetails["title"],
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,
@@ -135,18 +136,7 @@ class _OpenMoviesState extends State<OpenMovies> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: MaterialButton(
-        onPressed: () {},
-        child: Container(
-          child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.grey, borderRadius: BorderRadius.circular(8)),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextUsed("Book Ticket"),
-              )),
-        ),
-      ),
+      floatingActionButton: BookButton(),
     );
   }
 }

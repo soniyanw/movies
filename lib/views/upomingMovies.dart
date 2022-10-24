@@ -16,7 +16,11 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
   Widget build(BuildContext context) {
     BuiltList? upcommovies = context.read<AppViewModel>().state.upcoming;
     return (upcommovies == null || upcommovies.length == 0)
-        ? Container(color: Colors.pink)
+        ? Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          )
         : GridView.count(
             shrinkWrap: true, // use it
 

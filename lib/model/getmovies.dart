@@ -26,4 +26,5 @@ abstract class Getmovies implements Built<Getmovies, GetmoviesBuilder> {
   Map<String, dynamic>? get currentmoviedetails;
   String? get movieid;
   BuiltList<Map<String, dynamic>>? get castlist;
+  int? get seats;
 }

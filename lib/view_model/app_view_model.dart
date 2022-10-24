@@ -67,4 +67,10 @@ class AppViewModel extends AppStateNotifier<Getmovies>
       p0.castlist = b.toBuilder();
     });
   }
+
+  void getseats(int seats) {
+    state = state.rebuild((p0) {
+      p0.seats = seats;
+    });
+  }
 }

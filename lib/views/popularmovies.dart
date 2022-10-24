@@ -17,7 +17,11 @@ class _PopularMoviesState extends State<PopularMovies> {
     BuiltList? popmovies = context.read<AppViewModel>().state.popular;
 
     return (popmovies == null || popmovies.length == 0)
-        ? Container(color: Colors.pink)
+        ? Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          )
         : GridView.count(
             shrinkWrap: true, // use it
 

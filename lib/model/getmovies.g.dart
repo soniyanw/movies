@@ -82,6 +82,12 @@ class _$GetmoviesSerializer implements StructuredSerializer<Getmovies> {
                   Map, const [const FullType(String), const FullType(dynamic)])
             ])));
     }
+    value = object.seats;
+    if (value != null) {
+      result
+        ..add('seats')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -142,6 +148,10 @@ class _$GetmoviesSerializer implements StructuredSerializer<Getmovies> {
                     const [const FullType(String), const FullType(dynamic)])
               ]))! as BuiltList<Object?>);
           break;
+        case 'seats':
+          result.seats = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
       }
     }
 
@@ -164,6 +174,8 @@ class _$Getmovies extends Getmovies {
   final String? movieid;
   @override
   final BuiltList<Map<String, dynamic>>? castlist;
+  @override
+  final int? seats;
 
   factory _$Getmovies([void Function(GetmoviesBuilder)? updates]) =>
       (new GetmoviesBuilder()..update(updates))._build();
@@ -175,7 +187,8 @@ class _$Getmovies extends Getmovies {
       this.currentmovie,
       this.currentmoviedetails,
       this.movieid,
-      this.castlist})
+      this.castlist,
+      this.seats})
       : super._();
 
   @override
@@ -195,7 +208,8 @@ class _$Getmovies extends Getmovies {
         currentmovie == other.currentmovie &&
         currentmoviedetails == other.currentmoviedetails &&
         movieid == other.movieid &&
-        castlist == other.castlist;
+        castlist == other.castlist &&
+        seats == other.seats;
   }
 
   @override
@@ -204,12 +218,14 @@ class _$Getmovies extends Getmovies {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, popular.hashCode), toprated.hashCode),
-                        upcoming.hashCode),
-                    currentmovie.hashCode),
-                currentmoviedetails.hashCode),
-            movieid.hashCode),
-        castlist.hashCode));
+                    $jc(
+                        $jc($jc($jc(0, popular.hashCode), toprated.hashCode),
+                            upcoming.hashCode),
+                        currentmovie.hashCode),
+                    currentmoviedetails.hashCode),
+                movieid.hashCode),
+            castlist.hashCode),
+        seats.hashCode));
   }
 
   @override
@@ -221,7 +237,8 @@ class _$Getmovies extends Getmovies {
           ..add('currentmovie', currentmovie)
           ..add('currentmoviedetails', currentmoviedetails)
           ..add('movieid', movieid)
-          ..add('castlist', castlist))
+          ..add('castlist', castlist)
+          ..add('seats', seats))
         .toString();
   }
 }
@@ -267,6 +284,10 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
   set castlist(ListBuilder<Map<String, dynamic>>? castlist) =>
       _$this._castlist = castlist;
 
+  int? _seats;
+  int? get seats => _$this._seats;
+  set seats(int? seats) => _$this._seats = seats;
+
   GetmoviesBuilder();
 
   GetmoviesBuilder get _$this {
@@ -279,6 +300,7 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
       _currentmoviedetails = $v.currentmoviedetails;
       _movieid = $v.movieid;
       _castlist = $v.castlist?.toBuilder();
+      _seats = $v.seats;
       _$v = null;
     }
     return this;
@@ -309,7 +331,8 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
               currentmovie: currentmovie,
               currentmoviedetails: currentmoviedetails,
               movieid: movieid,
-              castlist: _castlist?.build());
+              castlist: _castlist?.build(),
+              seats: seats);
     } catch (_) {
       late String _$failedField;
       try {

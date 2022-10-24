@@ -133,7 +133,6 @@ class NotificationServiceImpl implements NotificationService {
     final http.Response response = await http.get(Uri.parse(request));
     final Map<String, dynamic> requestmap =
         await json.decode(response.body) as Map<String, dynamic>;
-    print(requestmap);
     List<dynamic> casts = requestmap["cast"];
     final List<Map<String, dynamic>> castlist = [];
     casts.forEach((element) async {

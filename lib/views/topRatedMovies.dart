@@ -17,7 +17,11 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
     BuiltList? topmovies = context.read<AppViewModel>().state.toprated;
 
     return (topmovies == null || topmovies.length == 0)
-        ? Container(color: Colors.pink)
+        ? Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          )
         : GridView.count(
             shrinkWrap: true, // use it
 

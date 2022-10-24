@@ -1,7 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:movies/model/moviedetails.dart';
 import 'package:movies/model/serializers.dart';
 
 part 'getmovies.g.dart';
@@ -21,7 +20,7 @@ abstract class Getmovies implements Built<Getmovies, GetmoviesBuilder> {
 
   static Serializer<Getmovies> get serializer => _$getmoviesSerializer;
   BuiltList<Map<String, dynamic>>? get popular;
-
   BuiltList<Map<String, dynamic>>? get toprated;
   BuiltList<Map<String, dynamic>>? get upcoming;
+  Map<String, dynamic>? get currentmovie;
 }

@@ -9,7 +9,6 @@ part of serializers;
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AppState.serializer)
       ..add(Getmovies.serializer)
-      ..add(Moviedetails.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType(

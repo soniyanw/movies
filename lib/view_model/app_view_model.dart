@@ -53,4 +53,9 @@ class AppViewModel extends AppStateNotifier<Getmovies>
       p0.upcoming = a.toBuilder();
     });
   }
+
+  void getcurrentmovie(int index, BuiltList? movielist) {
+    state = state.rebuild(
+        (p0) => p0.currentmovie = (movielist![index]) as Map<String, dynamic>);
+  }
 }

@@ -239,3 +239,38 @@ class AppText extends StatelessWidget {
     return Text(text);
   }
 }
+
+class BigText extends StatelessWidget {
+  const BigText(
+    this.text, {
+    Key? key,
+  }) : super(key: key);
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+          color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class TextUsed extends StatelessWidget {
+  const TextUsed(
+    this.text, {
+    Key? key,
+  }) : super(key: key);
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: Colors.white,
+      ),
+    );
+  }
+}

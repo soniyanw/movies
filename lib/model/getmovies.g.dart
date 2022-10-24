@@ -49,6 +49,14 @@ class _$GetmoviesSerializer implements StructuredSerializer<Getmovies> {
                   Map, const [const FullType(String), const FullType(dynamic)])
             ])));
     }
+    value = object.currentmovie;
+    if (value != null) {
+      result
+        ..add('currentmovie')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                Map, const [const FullType(String), const FullType(dynamic)])));
+    }
     return result;
   }
 
@@ -84,6 +92,13 @@ class _$GetmoviesSerializer implements StructuredSerializer<Getmovies> {
                     const [const FullType(String), const FullType(dynamic)])
               ]))! as BuiltList<Object?>);
           break;
+        case 'currentmovie':
+          result.currentmovie = serializers.deserialize(value,
+              specifiedType: const FullType(Map, const [
+                const FullType(String),
+                const FullType(dynamic)
+              ])) as Map<String, dynamic>?;
+          break;
       }
     }
 
@@ -98,11 +113,14 @@ class _$Getmovies extends Getmovies {
   final BuiltList<Map<String, dynamic>>? toprated;
   @override
   final BuiltList<Map<String, dynamic>>? upcoming;
+  @override
+  final Map<String, dynamic>? currentmovie;
 
   factory _$Getmovies([void Function(GetmoviesBuilder)? updates]) =>
       (new GetmoviesBuilder()..update(updates))._build();
 
-  _$Getmovies._({this.popular, this.toprated, this.upcoming}) : super._();
+  _$Getmovies._({this.popular, this.toprated, this.upcoming, this.currentmovie})
+      : super._();
 
   @override
   Getmovies rebuild(void Function(GetmoviesBuilder) updates) =>
@@ -117,13 +135,16 @@ class _$Getmovies extends Getmovies {
     return other is Getmovies &&
         popular == other.popular &&
         toprated == other.toprated &&
-        upcoming == other.upcoming;
+        upcoming == other.upcoming &&
+        currentmovie == other.currentmovie;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc(0, popular.hashCode), toprated.hashCode), upcoming.hashCode));
+        $jc($jc($jc(0, popular.hashCode), toprated.hashCode),
+            upcoming.hashCode),
+        currentmovie.hashCode));
   }
 
   @override
@@ -131,7 +152,8 @@ class _$Getmovies extends Getmovies {
     return (newBuiltValueToStringHelper(r'Getmovies')
           ..add('popular', popular)
           ..add('toprated', toprated)
-          ..add('upcoming', upcoming))
+          ..add('upcoming', upcoming)
+          ..add('currentmovie', currentmovie))
         .toString();
   }
 }
@@ -157,6 +179,11 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
   set upcoming(ListBuilder<Map<String, dynamic>>? upcoming) =>
       _$this._upcoming = upcoming;
 
+  Map<String, dynamic>? _currentmovie;
+  Map<String, dynamic>? get currentmovie => _$this._currentmovie;
+  set currentmovie(Map<String, dynamic>? currentmovie) =>
+      _$this._currentmovie = currentmovie;
+
   GetmoviesBuilder();
 
   GetmoviesBuilder get _$this {
@@ -165,6 +192,7 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
       _popular = $v.popular?.toBuilder();
       _toprated = $v.toprated?.toBuilder();
       _upcoming = $v.upcoming?.toBuilder();
+      _currentmovie = $v.currentmovie;
       _$v = null;
     }
     return this;
@@ -191,7 +219,8 @@ class GetmoviesBuilder implements Builder<Getmovies, GetmoviesBuilder> {
           new _$Getmovies._(
               popular: _popular?.build(),
               toprated: _toprated?.build(),
-              upcoming: _upcoming?.build());
+              upcoming: _upcoming?.build(),
+              currentmovie: currentmovie);
     } catch (_) {
       late String _$failedField;
       try {

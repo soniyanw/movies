@@ -1,15 +1,16 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/model/cast.dart';
 import 'package:movies/ui.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:provider/provider.dart';
 
-class Cast extends StatelessWidget {
-  const Cast({Key? key}) : super(key: key);
+class CastPage extends StatelessWidget {
+  const CastPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    BuiltList? castdetails = context.read<AppViewModel>().state.castlist;
+    BuiltList<Cast>? castdetails = context.read<AppViewModel>().state.castlist;
 
     return Container(
       height: 120.0,
@@ -22,12 +23,12 @@ class Cast extends StatelessWidget {
               width: 100,
               child: Align(
                   alignment: Alignment.bottomLeft,
-                  child: TextUsed(castdetails![index]["name"])),
+                  child: TextUsed(castdetails![index].name ?? '')),
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(
                       "https://image.tmdb.org/t/p/w500/" +
-                          castdetails[index]["profile_path"].toString(),
+                          castdetails[index].profile_path.toString(),
                     ),
                     fit: BoxFit.fitWidth),
               ),

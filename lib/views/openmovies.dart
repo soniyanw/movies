@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/model/movie_details.dart';
 import 'package:movies/ui.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/widgets/aboutmovie.dart';
@@ -19,7 +20,7 @@ class OpenMovies extends StatefulWidget {
 class _OpenMoviesState extends State<OpenMovies> {
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic>? moviedetails =
+    MovieDetails? moviedetails =
         context.read<AppViewModel>().state.currentmovie;
 
     return Scaffold(
@@ -44,7 +45,7 @@ class _OpenMoviesState extends State<OpenMovies> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextUsed(moviedetails!["release_date"]),
+                            child: TextUsed(moviedetails!.release_date ?? ''),
                           ),
                         ),
                         SizedBox(
@@ -57,8 +58,8 @@ class _OpenMoviesState extends State<OpenMovies> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextUsed(
-                                moviedetails["vote_average"].toString()),
+                            child:
+                                TextUsed(moviedetails.vote_average.toString()),
                           ),
                         )
                       ],
@@ -67,7 +68,7 @@ class _OpenMoviesState extends State<OpenMovies> {
                       height: 16,
                     ),
                     Text(
-                      moviedetails["title"],
+                      moviedetails.title ?? '',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,
@@ -76,19 +77,6 @@ class _OpenMoviesState extends State<OpenMovies> {
                     SizedBox(
                       height: 16,
                     ),
-                    /*  ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: moviedetailsfull!["genres"].length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Expanded(
-                            child: ListTile(
-                              leading: Text(moviedetailsfull["genres"][index]
-                                      ["id"]
-                                  .toString()),
-                            ),
-                          );
-                        }),*/
                   ],
                 ),
               ),
@@ -96,7 +84,7 @@ class _OpenMoviesState extends State<OpenMovies> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage("https://image.tmdb.org/t/p/w500" +
-                        moviedetails["backdrop_path"].toString()),
+                        moviedetails.backdrop_path.toString()),
                     fit: BoxFit.cover),
               ),
             ),
@@ -108,7 +96,7 @@ class _OpenMoviesState extends State<OpenMovies> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextUsed(moviedetails["overview"]),
+              child: TextUsed(moviedetails.overview ?? ''),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -120,7 +108,7 @@ class _OpenMoviesState extends State<OpenMovies> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            Cast(),
+            CastPage(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(

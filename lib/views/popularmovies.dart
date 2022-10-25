@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/model/movie_details.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/openmovies.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,8 @@ class PopularMovies extends StatefulWidget {
 class _PopularMoviesState extends State<PopularMovies> {
   @override
   Widget build(BuildContext context) {
-    BuiltList? popmovies = context.read<AppViewModel>().state.popular;
+    BuiltList<MovieDetails>? popmovies =
+        context.read<AppViewModel>().state.popular;
 
     return (popmovies == null || popmovies.length == 0)
         ? Center(
@@ -49,12 +51,12 @@ class _PopularMoviesState extends State<PopularMovies> {
                           child: Image(
                             image: NetworkImage(
                               "https://image.tmdb.org/t/p/w500" +
-                                  popmovies[index]["poster_path"].toString(),
+                                  popmovies[index].poster_path.toString(),
                             ),
                           ),
                         ),
                         Text(
-                          popmovies[index]["title"],
+                          popmovies[index].title ?? '',
                           style: TextStyle(color: Colors.white),
                         )
                       ],

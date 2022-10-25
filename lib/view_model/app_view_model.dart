@@ -1,7 +1,11 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:movies/data/notification_service_impl.dart';
-import 'package:movies/model/getmovies.dart';
+import 'package:movies/core/services/api_service.dart';
+import 'package:movies/data/api_service_imp.dart';
+import 'package:movies/model/app_state.dart';
+import 'package:movies/model/cast.dart';
+import 'package:movies/model/currentmovie_details.dart';
+import 'package:movies/model/movie_details.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../core/view_model/view_model.dart';
@@ -15,55 +19,52 @@ class AppProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StateNotifierProvider<AppViewModel, Getmovies>(
+    return StateNotifierProvider<AppViewModel, AppState>(
       create: (_) => AppViewModel(),
       child: child,
     );
   }
 }
 
-class AppViewModel extends AppStateNotifier<Getmovies>
+class AppViewModel extends AppStateNotifier<AppState>
     with LocatorMixin
     implements AppBaseViewModel {
-  AppViewModel() : super(Getmovies());
+  AppViewModel() : super(AppState());
+  APIService imp = APIServiceImp();
 
   @override
   Future<void> init() async {}
 
   Future<void> getpopular() async {
-    NotificationServiceImpl imp = NotificationServiceImpl();
-    BuiltList<Map<String, dynamic>>? a = await imp.getmoviespop();
+    BuiltList<MovieDetails>? a = await imp.getmoviespop();
     state = state.rebuild((p0) {
       p0.popular = a.toBuilder();
     });
   }
 
   Future<void> gettop() async {
-    NotificationServiceImpl imp = NotificationServiceImpl();
-    BuiltList<Map<String, dynamic>>? a = await imp.getmoviestop();
+    BuiltList<MovieDetails>? a = await imp.getmoviestop();
     state = state.rebuild((p0) {
       p0.toprated = a.toBuilder();
     });
   }
 
   Future<void> getpupcom() async {
-    NotificationServiceImpl imp = NotificationServiceImpl();
-    BuiltList<Map<String, dynamic>>? a = await imp.getmoviesupcom();
+    BuiltList<MovieDetails>? a = await imp.getmoviesupcom();
     state = state.rebuild((p0) {
       p0.upcoming = a.toBuilder();
     });
   }
 
-  Future<void> getcurrentmovie(int index, BuiltList? movielist) async {
-    NotificationServiceImpl imp = NotificationServiceImpl();
-    Map<String, dynamic> a =
-        await imp.getmoviedetails((movielist![index]["id"]).toString());
-    BuiltList<Map<String, dynamic>>? b =
-        await imp.getcastdetails((movielist[index]["id"]).toString());
+  Future<void> getcurrentmovie(
+      int index, BuiltList<MovieDetails>? movielist) async {
+    CurrentmovieDetails a =
+        await imp.getmoviedetails((movielist![index].id).toString());
+    BuiltList<Cast>? b =
+        await imp.getcastdetails((movielist[index].id).toString());
     state = state.rebuild((p0) {
-      p0.currentmovie = (movielist[index]) as Map<String, dynamic>;
-      p0.movieid = (movielist[index]["id"]).toString();
-      p0.currentmoviedetails = a;
+      p0.currentmovie = (movielist[index]).toBuilder();
+      p0.currentmoviedetails = a.toBuilder();
       p0.castlist = b.toBuilder();
     });
   }

@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/model/movie_details.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/openmovies.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,8 @@ class UpcomingMovies extends StatefulWidget {
 class _UpcomingMoviesState extends State<UpcomingMovies> {
   @override
   Widget build(BuildContext context) {
-    BuiltList? upcommovies = context.read<AppViewModel>().state.upcoming;
+    BuiltList<MovieDetails>? upcommovies =
+        context.read<AppViewModel>().state.upcoming;
     return (upcommovies == null || upcommovies.length == 0)
         ? Center(
             child: CircularProgressIndicator(
@@ -48,12 +50,12 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                           child: Image(
                             image: NetworkImage(
                               "https://image.tmdb.org/t/p/w500" +
-                                  upcommovies[index]["poster_path"].toString(),
+                                  upcommovies[index].poster_path.toString(),
                             ),
                           ),
                         ),
                         Text(
-                          upcommovies[index]["title"],
+                          upcommovies[index].title ?? '',
                           style: TextStyle(color: Colors.white),
                         )
                       ],

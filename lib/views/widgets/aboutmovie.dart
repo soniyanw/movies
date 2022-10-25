@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/model/currentmovie_details.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/widgets/app_texts.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,7 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic>? moviedetailsfull =
+    CurrentmovieDetails? moviedetailsfull =
         context.read<AppViewModel>().state.currentmoviedetails;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -36,14 +37,14 @@ class About extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextUsed(moviedetailsfull!["original_title"].toString()),
-                TextUsed(moviedetailsfull["status"].toString()),
-                TextUsed(moviedetailsfull["runtime"].toString()),
-                TextUsed(moviedetailsfull["release_date"].toString()),
-                TextUsed(moviedetailsfull["budget"].toString()),
-                TextUsed(moviedetailsfull["revenue"].toString()),
-                TextUsed(moviedetailsfull["imdb_id"].toString()),
-                TextUsed(moviedetailsfull["vote_average"].toString())
+                TextUsed(moviedetailsfull!.original_title.toString()),
+                TextUsed(moviedetailsfull.status.toString()),
+                TextUsed(moviedetailsfull.runtime.toString()),
+                TextUsed(moviedetailsfull.release_date.toString()),
+                TextUsed(moviedetailsfull.budget.toString()),
+                TextUsed(moviedetailsfull.revenue.toString()),
+                TextUsed(moviedetailsfull.imdb_id.toString()),
+                TextUsed(moviedetailsfull.vote_average.toString())
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/model/movie_details.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/widgets/app_texts.dart';
 import 'package:provider/provider.dart';
@@ -55,13 +56,13 @@ class _SeatsState extends State<Seats> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic>? moviedetails =
+    MovieDetails? moviedetails =
         context.read<AppViewModel>().state.currentmovie;
     int? seats = context.read<AppViewModel>().state.seats;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text(moviedetails!["title"]),
+        title: Text(moviedetails!.title ?? ''),
         backgroundColor: Colors.black,
       ),
       body: Column(

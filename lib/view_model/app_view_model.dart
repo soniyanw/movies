@@ -50,7 +50,7 @@ class AppViewModel extends AppStateNotifier<AppState>
     });
   }
 
-  Future<void> getpupcom() async {
+  Future<void> getupcom() async {
     BuiltList<MovieDetails>? a = await imp.getmoviesupcom();
     state = state.rebuild((p0) {
       p0.upcoming = a.toBuilder();

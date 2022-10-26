@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/model/castcredits.dart';
 import 'package:movies/ui.dart';
-import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/widgets/moviecredits_cast.dart';
 import 'package:movies/views/widgets/tvcredits_cast.dart';
 
@@ -26,7 +25,7 @@ class _CastDetailsState extends State<CastDetails>
 
   @override
   Widget build(BuildContext context) {
-    Castcredits? castdetails = context.read<AppViewModel>().state.castcredits;
+    Castcredits? castdetails = context.appViewModel.state.castcredits;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,

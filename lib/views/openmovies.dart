@@ -2,11 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/movie_details.dart';
 import 'package:movies/ui.dart';
-import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/widgets/aboutmovie.dart';
 import 'package:movies/views/widgets/bookbutton.dart';
 import 'package:movies/views/widgets/castgrid.dart';
-import 'package:provider/provider.dart';
 
 import '../ui.dart';
 
@@ -20,8 +18,7 @@ class OpenMovies extends StatefulWidget {
 class _OpenMoviesState extends State<OpenMovies> {
   @override
   Widget build(BuildContext context) {
-    MovieDetails? moviedetails =
-        context.read<AppViewModel>().state.currentmovie_tv;
+    MovieDetails? moviedetails = context.appViewModel.state.currentmovie_tv;
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(

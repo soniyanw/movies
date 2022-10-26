@@ -1,6 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/movie_details.dart';
+import 'package:movies/ui.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/openmovies.dart';
 import 'package:provider/provider.dart';
@@ -16,13 +17,9 @@ class _MovieCreditsCastState extends State<MovieCreditsCast> {
   @override
   Widget build(BuildContext context) {
     BuiltList<MovieDetails>? moviecredits =
-        context.read<AppViewModel>().state.currentcast_movies;
+        context.appViewModel.state.currentcast_movies;
     return (moviecredits == null || moviecredits.length == 0)
-        ? Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
-            ),
-          )
+        ? Center(child: BigText("No Movies"))
         : GridView.count(
             shrinkWrap: true, // use it
 

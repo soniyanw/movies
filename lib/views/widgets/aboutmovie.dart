@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/model/currentmovie_details.dart';
-import 'package:movies/view_model/app_view_model.dart';
+import 'package:movies/ui.dart';
 import 'package:movies/views/widgets/app_texts.dart';
-import 'package:provider/provider.dart';
 
 class About extends StatelessWidget {
   const About({Key? key}) : super(key: key);
@@ -10,7 +9,7 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CurrentmovieDetails? moviedetailsfull =
-        context.read<AppViewModel>().state.currentmoviedetails;
+        context.appViewModel.state.currentmoviedetails;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(

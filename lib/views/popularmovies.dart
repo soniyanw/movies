@@ -1,6 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/movie_details.dart';
+import 'package:movies/ui.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/openmovies.dart';
 import 'package:provider/provider.dart';
@@ -15,15 +16,10 @@ class PopularMovies extends StatefulWidget {
 class _PopularMoviesState extends State<PopularMovies> {
   @override
   Widget build(BuildContext context) {
-    BuiltList<MovieDetails>? popmovies =
-        context.read<AppViewModel>().state.popular;
+    BuiltList<MovieDetails>? popmovies = context.appViewModel.state.popular;
 
     return (popmovies == null || popmovies.length == 0)
-        ? Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
-            ),
-          )
+        ? Center(child: BigText("No Movies"))
         : GridView.count(
             shrinkWrap: true, // use it
 

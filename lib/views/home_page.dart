@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/popularmovies.dart';
 import 'package:movies/views/topRatedMovies.dart';
 import 'package:movies/views/upomingMovies.dart';
@@ -15,16 +14,18 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AppProviderMixin<HomePage> {
-  Future<void> method() async {
-    await context.read<AppViewModel>().getpupcom();
-    await context.read<AppViewModel>().getpopular();
-    await context.read<AppViewModel>().gettop();
+class _HomePageState extends State<HomePage>
+    with AppProviderMixin<HomePage>, StateMixin {
+  Future<void> fetch_movies() async {
+    setLoading();
+    await context.appViewModel.getupcom();
+    await context.appViewModel.getpopular();
+    await context.appViewModel.gettop();
+    resetLoading();
   }
 
   void initState() {
-    method();
-
+    fetch_movies();
     // TODO: implement initState
     super.initState();
   }
@@ -46,28 +47,33 @@ class _HomePageState extends State<HomePage> with AppProviderMixin<HomePage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          leading: Icon(Icons.menu),
-          title: Text("Book Movie"),
           backgroundColor: Colors.black,
-          bottom: upperTab,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: Icon(Icons.search_rounded),
-            )
-          ],
-          elevation: 20,
-        ),
-        body: TabBarView(
-          children: [
-            PopularMovies(),
-            TopRatedMovies(),
-            UpcomingMovies(),
-          ],
-        ),
-      ),
+          appBar: AppBar(
+            leading: Icon(Icons.menu),
+            title: Text("Book Movie"),
+            backgroundColor: Colors.black,
+            bottom: upperTab,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: Icon(Icons.search_rounded),
+              )
+            ],
+            elevation: 20,
+          ),
+          body: loading == false
+              ? TabBarView(
+                  children: [
+                    PopularMovies(),
+                    TopRatedMovies(),
+                    UpcomingMovies(),
+                  ],
+                )
+              : Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                )),
     );
   }
 }

@@ -1,8 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/movie_details.dart';
-import 'package:movies/view_model/app_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:movies/ui.dart';
 
 class TVCreditsCast extends StatefulWidget {
   const TVCreditsCast({Key? key}) : super(key: key);
@@ -14,14 +13,9 @@ class TVCreditsCast extends StatefulWidget {
 class _TVCreditsCastState extends State<TVCreditsCast> {
   @override
   Widget build(BuildContext context) {
-    BuiltList<MovieDetails>? tvcredits =
-        context.read<AppViewModel>().state.current_tvs;
+    BuiltList<MovieDetails>? tvcredits = context.appViewModel.state.current_tvs;
     return (tvcredits == null || tvcredits.length == 0)
-        ? Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
-            ),
-          )
+        ? Center(child: BigText("No Shows"))
         : GridView.count(
             shrinkWrap: true, // use it
 

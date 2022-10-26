@@ -27,4 +27,6 @@ abstract class MovieDetails
   double? get vote_average;
   String? get backdrop_path;
   String? get overview;
+  String? get name;
+  String? get first_air_date;
 }

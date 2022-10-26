@@ -57,7 +57,7 @@ class _SeatsState extends State<Seats> {
   @override
   Widget build(BuildContext context) {
     MovieDetails? moviedetails =
-        context.read<AppViewModel>().state.currentmovie;
+        context.read<AppViewModel>().state.currentmovie_tv;
     int? seats = context.read<AppViewModel>().state.seats;
     return Scaffold(
       backgroundColor: Colors.black,

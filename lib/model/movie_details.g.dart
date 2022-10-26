@@ -68,6 +68,20 @@ class _$MovieDetailsSerializer implements StructuredSerializer<MovieDetails> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.name;
+    if (value != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.first_air_date;
+    if (value != null) {
+      result
+        ..add('first_air_date')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -111,6 +125,14 @@ class _$MovieDetailsSerializer implements StructuredSerializer<MovieDetails> {
           result.overview = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'first_air_date':
+          result.first_air_date = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
       }
     }
 
@@ -133,6 +155,10 @@ class _$MovieDetails extends MovieDetails {
   final String? backdrop_path;
   @override
   final String? overview;
+  @override
+  final String? name;
+  @override
+  final String? first_air_date;
 
   factory _$MovieDetails([void Function(MovieDetailsBuilder)? updates]) =>
       (new MovieDetailsBuilder()..update(updates))._build();
@@ -144,7 +170,9 @@ class _$MovieDetails extends MovieDetails {
       this.release_date,
       this.vote_average,
       this.backdrop_path,
-      this.overview})
+      this.overview,
+      this.name,
+      this.first_air_date})
       : super._();
 
   @override
@@ -164,7 +192,9 @@ class _$MovieDetails extends MovieDetails {
         release_date == other.release_date &&
         vote_average == other.vote_average &&
         backdrop_path == other.backdrop_path &&
-        overview == other.overview;
+        overview == other.overview &&
+        name == other.name &&
+        first_air_date == other.first_air_date;
   }
 
   @override
@@ -173,12 +203,16 @@ class _$MovieDetails extends MovieDetails {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, id.hashCode), poster_path.hashCode),
-                        title.hashCode),
-                    release_date.hashCode),
-                vote_average.hashCode),
-            backdrop_path.hashCode),
-        overview.hashCode));
+                    $jc(
+                        $jc(
+                            $jc($jc($jc(0, id.hashCode), poster_path.hashCode),
+                                title.hashCode),
+                            release_date.hashCode),
+                        vote_average.hashCode),
+                    backdrop_path.hashCode),
+                overview.hashCode),
+            name.hashCode),
+        first_air_date.hashCode));
   }
 
   @override
@@ -190,7 +224,9 @@ class _$MovieDetails extends MovieDetails {
           ..add('release_date', release_date)
           ..add('vote_average', vote_average)
           ..add('backdrop_path', backdrop_path)
-          ..add('overview', overview))
+          ..add('overview', overview)
+          ..add('name', name)
+          ..add('first_air_date', first_air_date))
         .toString();
   }
 }
@@ -228,6 +264,15 @@ class MovieDetailsBuilder
   String? get overview => _$this._overview;
   set overview(String? overview) => _$this._overview = overview;
 
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  String? _first_air_date;
+  String? get first_air_date => _$this._first_air_date;
+  set first_air_date(String? first_air_date) =>
+      _$this._first_air_date = first_air_date;
+
   MovieDetailsBuilder();
 
   MovieDetailsBuilder get _$this {
@@ -240,6 +285,8 @@ class MovieDetailsBuilder
       _vote_average = $v.vote_average;
       _backdrop_path = $v.backdrop_path;
       _overview = $v.overview;
+      _name = $v.name;
+      _first_air_date = $v.first_air_date;
       _$v = null;
     }
     return this;
@@ -268,7 +315,9 @@ class MovieDetailsBuilder
             release_date: release_date,
             vote_average: vote_average,
             backdrop_path: backdrop_path,
-            overview: overview);
+            overview: overview,
+            name: name,
+            first_air_date: first_air_date);
     replace(_$result);
     return _$result;
   }

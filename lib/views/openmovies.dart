@@ -5,7 +5,7 @@ import 'package:movies/ui.dart';
 import 'package:movies/view_model/app_view_model.dart';
 import 'package:movies/views/widgets/aboutmovie.dart';
 import 'package:movies/views/widgets/bookbutton.dart';
-import 'package:movies/views/widgets/cast.dart';
+import 'package:movies/views/widgets/castgrid.dart';
 import 'package:provider/provider.dart';
 
 import '../ui.dart';
@@ -21,8 +21,7 @@ class _OpenMoviesState extends State<OpenMovies> {
   @override
   Widget build(BuildContext context) {
     MovieDetails? moviedetails =
-        context.read<AppViewModel>().state.currentmovie;
-
+        context.read<AppViewModel>().state.currentmovie_tv;
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -45,7 +44,9 @@ class _OpenMoviesState extends State<OpenMovies> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: TextUsed(moviedetails!.release_date ?? ''),
+                            child: TextUsed(moviedetails!.release_date != ""
+                                ? moviedetails.release_date ?? 'Not available'
+                                : "Not available"),
                           ),
                         ),
                         SizedBox(
@@ -68,7 +69,7 @@ class _OpenMoviesState extends State<OpenMovies> {
                       height: 16,
                     ),
                     Text(
-                      moviedetails.title ?? '',
+                      moviedetails.title ?? 'Not available',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,
@@ -96,7 +97,7 @@ class _OpenMoviesState extends State<OpenMovies> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextUsed(moviedetails.overview ?? ''),
+              child: TextUsed(moviedetails.overview ?? 'Not Available'),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:movies/model/serializers.dart';
@@ -21,4 +20,5 @@ abstract class Cast implements Built<Cast, CastBuilder> {
   static Serializer<Cast> get serializer => _$castSerializer;
   String? get name;
   String? get profile_path;
+  int? get id;
 }

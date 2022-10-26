@@ -17,7 +17,16 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
   @override
   Iterable<Object?> serialize(Serializers serializers, AppState object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[];
+    final result = <Object?>[
+      'currentcast_movies',
+      serializers.serialize(object.currentcast_movies,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(MovieDetails)])),
+      'current_tvs',
+      serializers.serialize(object.current_tvs,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(MovieDetails)])),
+    ];
     Object? value;
     value = object.popular;
     if (value != null) {
@@ -43,7 +52,7 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
             specifiedType: const FullType(
                 BuiltList, const [const FullType(MovieDetails)])));
     }
-    value = object.currentmovie;
+    value = object.currentmovie_tv;
     if (value != null) {
       result
         ..add('currentmovie')
@@ -77,6 +86,19 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       result
         ..add('seats')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.currentcastid;
+    if (value != null) {
+      result
+        ..add('currentcastid')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.castcredits;
+    if (value != null) {
+      result
+        ..add('castcredits')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(Castcredits)));
     }
     return result;
   }
@@ -133,6 +155,26 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
           result.seats = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'currentcastid':
+          result.currentcastid = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'castcredits':
+          result.castcredits.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Castcredits))! as Castcredits);
+          break;
+        case 'currentcast_movies':
+          result.currentcast_movies.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(MovieDetails)]))!
+              as BuiltList<Object?>);
+          break;
+        case 'current_tvs':
+          result.current_tvs.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(MovieDetails)]))!
+              as BuiltList<Object?>);
+          break;
       }
     }
 
@@ -148,7 +190,7 @@ class _$AppState extends AppState {
   @override
   final BuiltList<MovieDetails>? upcoming;
   @override
-  final MovieDetails? currentmovie;
+  final MovieDetails? currentmovie_tv;
   @override
   final CurrentmovieDetails? currentmoviedetails;
   @override
@@ -157,6 +199,14 @@ class _$AppState extends AppState {
   final BuiltList<Cast>? castlist;
   @override
   final int? seats;
+  @override
+  final int? currentcastid;
+  @override
+  final Castcredits? castcredits;
+  @override
+  final BuiltList<MovieDetails> currentcast_movies;
+  @override
+  final BuiltList<MovieDetails> current_tvs;
 
   factory _$AppState([void Function(AppStateBuilder)? updates]) =>
       (new AppStateBuilder()..update(updates))._build();
@@ -165,12 +215,21 @@ class _$AppState extends AppState {
       {this.popular,
       this.toprated,
       this.upcoming,
-      this.currentmovie,
+      this.currentmovie_tv,
       this.currentmoviedetails,
       this.movieid,
       this.castlist,
-      this.seats})
-      : super._();
+      this.seats,
+      this.currentcastid,
+      this.castcredits,
+      required this.currentcast_movies,
+      required this.current_tvs})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        currentcast_movies, r'AppState', 'currentcast_movies');
+    BuiltValueNullFieldError.checkNotNull(
+        current_tvs, r'AppState', 'current_tvs');
+  }
 
   @override
   AppState rebuild(void Function(AppStateBuilder) updates) =>
@@ -186,11 +245,15 @@ class _$AppState extends AppState {
         popular == other.popular &&
         toprated == other.toprated &&
         upcoming == other.upcoming &&
-        currentmovie == other.currentmovie &&
+        currentmovie_tv == other.currentmovie_tv &&
         currentmoviedetails == other.currentmoviedetails &&
         movieid == other.movieid &&
         castlist == other.castlist &&
-        seats == other.seats;
+        seats == other.seats &&
+        currentcastid == other.currentcastid &&
+        castcredits == other.castcredits &&
+        currentcast_movies == other.currentcast_movies &&
+        current_tvs == other.current_tvs;
   }
 
   @override
@@ -200,13 +263,23 @@ class _$AppState extends AppState {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, popular.hashCode), toprated.hashCode),
-                            upcoming.hashCode),
-                        currentmovie.hashCode),
-                    currentmoviedetails.hashCode),
-                movieid.hashCode),
-            castlist.hashCode),
-        seats.hashCode));
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc(
+                                        $jc(
+                                            $jc($jc(0, popular.hashCode),
+                                                toprated.hashCode),
+                                            upcoming.hashCode),
+                                        currentmovie_tv.hashCode),
+                                    currentmoviedetails.hashCode),
+                                movieid.hashCode),
+                            castlist.hashCode),
+                        seats.hashCode),
+                    currentcastid.hashCode),
+                castcredits.hashCode),
+            currentcast_movies.hashCode),
+        current_tvs.hashCode));
   }
 
   @override
@@ -215,11 +288,15 @@ class _$AppState extends AppState {
           ..add('popular', popular)
           ..add('toprated', toprated)
           ..add('upcoming', upcoming)
-          ..add('currentmovie', currentmovie)
+          ..add('currentmovie', currentmovie_tv)
           ..add('currentmoviedetails', currentmoviedetails)
           ..add('movieid', movieid)
           ..add('castlist', castlist)
-          ..add('seats', seats))
+          ..add('seats', seats)
+          ..add('currentcastid', currentcastid)
+          ..add('castcredits', castcredits)
+          ..add('currentcast_movies', currentcast_movies)
+          ..add('current_tvs', current_tvs))
         .toString();
   }
 }
@@ -269,6 +346,29 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   int? get seats => _$this._seats;
   set seats(int? seats) => _$this._seats = seats;
 
+  int? _currentcastid;
+  int? get currentcastid => _$this._currentcastid;
+  set currentcastid(int? currentcastid) =>
+      _$this._currentcastid = currentcastid;
+
+  CastcreditsBuilder? _castcredits;
+  CastcreditsBuilder get castcredits =>
+      _$this._castcredits ??= new CastcreditsBuilder();
+  set castcredits(CastcreditsBuilder? castcredits) =>
+      _$this._castcredits = castcredits;
+
+  ListBuilder<MovieDetails>? _currentcast_movies;
+  ListBuilder<MovieDetails> get currentcast_movies =>
+      _$this._currentcast_movies ??= new ListBuilder<MovieDetails>();
+  set currentcast_movies(ListBuilder<MovieDetails>? currentcast_movies) =>
+      _$this._currentcast_movies = currentcast_movies;
+
+  ListBuilder<MovieDetails>? _current_tvs;
+  ListBuilder<MovieDetails> get current_tvs =>
+      _$this._current_tvs ??= new ListBuilder<MovieDetails>();
+  set current_tvs(ListBuilder<MovieDetails>? current_tvs) =>
+      _$this._current_tvs = current_tvs;
+
   AppStateBuilder() {
     AppState._initializeBuilder(this);
   }
@@ -279,11 +379,15 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _popular = $v.popular?.toBuilder();
       _toprated = $v.toprated?.toBuilder();
       _upcoming = $v.upcoming?.toBuilder();
-      _currentmovie = $v.currentmovie?.toBuilder();
+      _currentmovie = $v.currentmovie_tv?.toBuilder();
       _currentmoviedetails = $v.currentmoviedetails?.toBuilder();
       _movieid = $v.movieid;
       _castlist = $v.castlist?.toBuilder();
       _seats = $v.seats;
+      _currentcastid = $v.currentcastid;
+      _castcredits = $v.castcredits?.toBuilder();
+      _currentcast_movies = $v.currentcast_movies.toBuilder();
+      _current_tvs = $v.current_tvs.toBuilder();
       _$v = null;
     }
     return this;
@@ -311,11 +415,15 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               popular: _popular?.build(),
               toprated: _toprated?.build(),
               upcoming: _upcoming?.build(),
-              currentmovie: _currentmovie?.build(),
+              currentmovie_tv: _currentmovie?.build(),
               currentmoviedetails: _currentmoviedetails?.build(),
               movieid: movieid,
               castlist: _castlist?.build(),
-              seats: seats);
+              seats: seats,
+              currentcastid: currentcastid,
+              castcredits: _castcredits?.build(),
+              currentcast_movies: currentcast_movies.build(),
+              current_tvs: current_tvs.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -332,6 +440,13 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
 
         _$failedField = 'castlist';
         _castlist?.build();
+
+        _$failedField = 'castcredits';
+        _castcredits?.build();
+        _$failedField = 'currentcast_movies';
+        currentcast_movies.build();
+        _$failedField = 'current_tvs';
+        current_tvs.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'AppState', _$failedField, e.toString());

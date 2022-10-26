@@ -37,13 +37,20 @@ class About extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextUsed(moviedetailsfull!.original_title.toString()),
-                TextUsed(moviedetailsfull.status.toString()),
-                TextUsed(moviedetailsfull.runtime.toString()),
-                TextUsed(moviedetailsfull.release_date.toString()),
-                TextUsed(moviedetailsfull.budget.toString()),
-                TextUsed(moviedetailsfull.revenue.toString()),
-                TextUsed(moviedetailsfull.imdb_id.toString()),
+                TextUsed(moviedetailsfull!.original_title ?? 'Not available'),
+                TextUsed(moviedetailsfull.status ?? 'Not available'),
+                TextUsed(
+                    (moviedetailsfull.runtime ?? "Not available").toString()),
+                TextUsed((moviedetailsfull.release_date != "" &&
+                            moviedetailsfull.release_date != null
+                        ? moviedetailsfull.release_date
+                        : "Not available")
+                    .toString()),
+                TextUsed(
+                    (moviedetailsfull.budget ?? "Not available").toString()),
+                TextUsed(
+                    (moviedetailsfull.revenue ?? "Not available").toString()),
+                TextUsed((moviedetailsfull.imdb_id ?? '-').toString()),
                 TextUsed(moviedetailsfull.vote_average.toString())
               ],
             ),

@@ -4,6 +4,7 @@ import 'package:movies/core/services/api_service.dart';
 import 'package:movies/data/api_service_imp.dart';
 import 'package:movies/model/app_state.dart';
 import 'package:movies/model/cast.dart';
+import 'package:movies/model/castcredits.dart';
 import 'package:movies/model/currentmovie_details.dart';
 import 'package:movies/model/movie_details.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -72,6 +73,19 @@ class AppViewModel extends AppStateNotifier<AppState>
   void getseats(int seats) {
     state = state.rebuild((p0) {
       p0.seats = seats;
+    });
+  }
+
+  Future<void> getcastdetails_withcredits(int castid) async {
+    Castcredits a = await imp.getcastdetails_and_credits((castid));
+    BuiltList<MovieDetails>? b = await imp.getcast_movies(castid);
+    BuiltList<MovieDetails>? e = await imp.getcast_tvs(castid);
+
+    print(b);
+    state = state.rebuild((p0) {
+      p0.castcredits = (a).toBuilder();
+      p0.currentcast_movies = b.toBuilder();
+      p0.current_tvs = e.toBuilder();
     });
   }
 }

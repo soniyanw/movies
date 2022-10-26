@@ -33,6 +33,12 @@ class _$CastSerializer implements StructuredSerializer<Cast> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.id;
+    if (value != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -55,6 +61,10 @@ class _$CastSerializer implements StructuredSerializer<Cast> {
           result.profile_path = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
       }
     }
 
@@ -67,11 +77,13 @@ class _$Cast extends Cast {
   final String? name;
   @override
   final String? profile_path;
+  @override
+  final int? id;
 
   factory _$Cast([void Function(CastBuilder)? updates]) =>
       (new CastBuilder()..update(updates))._build();
 
-  _$Cast._({this.name, this.profile_path}) : super._();
+  _$Cast._({this.name, this.profile_path, this.id}) : super._();
 
   @override
   Cast rebuild(void Function(CastBuilder) updates) =>
@@ -85,19 +97,22 @@ class _$Cast extends Cast {
     if (identical(other, this)) return true;
     return other is Cast &&
         name == other.name &&
-        profile_path == other.profile_path;
+        profile_path == other.profile_path &&
+        id == other.id;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, name.hashCode), profile_path.hashCode));
+    return $jf(
+        $jc($jc($jc(0, name.hashCode), profile_path.hashCode), id.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'Cast')
           ..add('name', name)
-          ..add('profile_path', profile_path))
+          ..add('profile_path', profile_path)
+          ..add('id', id))
         .toString();
   }
 }
@@ -113,6 +128,10 @@ class CastBuilder implements Builder<Cast, CastBuilder> {
   String? get profile_path => _$this._profile_path;
   set profile_path(String? profile_path) => _$this._profile_path = profile_path;
 
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
   CastBuilder();
 
   CastBuilder get _$this {
@@ -120,6 +139,7 @@ class CastBuilder implements Builder<Cast, CastBuilder> {
     if ($v != null) {
       _name = $v.name;
       _profile_path = $v.profile_path;
+      _id = $v.id;
       _$v = null;
     }
     return this;
@@ -141,7 +161,7 @@ class CastBuilder implements Builder<Cast, CastBuilder> {
 
   _$Cast _build() {
     final _$result =
-        _$v ?? new _$Cast._(name: name, profile_path: profile_path);
+        _$v ?? new _$Cast._(name: name, profile_path: profile_path, id: id);
     replace(_$result);
     return _$result;
   }

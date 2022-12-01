@@ -35,13 +35,6 @@ class AppViewModel extends AppStateNotifier<AppState>
 
   @override
   Future<void> init() async {}
-  ThemeData theme = ThemeData(
-      primarySwatch: Colors.grey,
-      primaryColor: Colors.black,
-      buttonColor: Colors.grey,
-      brightness: Brightness.dark,
-      dividerColor: Colors.black12,
-      accentColor: Colors.white);
 
   Future<void> getpopular() async {
     BuiltList<MovieDetails>? a = await imp.getmoviespop();

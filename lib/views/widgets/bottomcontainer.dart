@@ -17,13 +17,12 @@ class _BottomState extends State<Bottom> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[800],
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           AppBar(
-            backgroundColor: Colors.grey[800],
+            //backgroundColor: Colors.grey[800],
             title: Text("Select Numbet of Seats"),
             actions: [
               Padding(
@@ -32,13 +31,13 @@ class _BottomState extends State<Bottom> {
                   value: dropdownValue,
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.white70,
+                    //color: Colors.white70,
                   ),
                   elevation: 16,
-                  style: const TextStyle(color: Colors.grey),
+                  // style: const TextStyle(color: Colors.grey),
                   underline: Container(
                     height: 2,
-                    color: Colors.white70,
+                    //color: Colors.white70,
                   ),
                   onChanged: (int? value) {
                     // This is called when the user selects an item.
@@ -51,7 +50,7 @@ class _BottomState extends State<Bottom> {
                       value: value,
                       child: Text(
                         value.toString(),
-                        style: TextStyle(color: Colors.grey),
+                        //style: TextStyle(color: Colors.grey),
                       ),
                     );
                   }).toList(),

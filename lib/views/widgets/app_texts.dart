@@ -251,8 +251,7 @@ class BigText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
-          color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
     );
   }
 }
@@ -268,9 +267,7 @@ class TextUsed extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
-        color: Colors.white,
-      ),
+      style: TextStyle(),
     );
   }
 }

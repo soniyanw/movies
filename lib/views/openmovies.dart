@@ -20,7 +20,6 @@ class _OpenMoviesState extends State<OpenMovies> {
   Widget build(BuildContext context) {
     MovieDetails? moviedetails = context.appViewModel.state.currentmovie_tv;
     return Scaffold(
-      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,8 +67,8 @@ class _OpenMoviesState extends State<OpenMovies> {
                     Text(
                       moviedetails.title ?? 'Not available',
                       style: TextStyle(
-                          color: Colors.white,
                           fontSize: 28,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -100,10 +99,7 @@ class _OpenMoviesState extends State<OpenMovies> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Cast",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
             CastPage(),
@@ -111,10 +107,7 @@ class _OpenMoviesState extends State<OpenMovies> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "About",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
             About()

@@ -58,10 +58,8 @@ class _SeatsState extends State<Seats> {
     MovieDetails? moviedetails = context.appViewModel.state.currentmovie_tv;
     int? seats = context.appViewModel.state.seats;
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(moviedetails!.title ?? ''),
-        backgroundColor: Colors.black,
       ),
       body: Column(
         children: [
@@ -70,10 +68,7 @@ class _SeatsState extends State<Seats> {
             child: Center(
                 child: Text(
               "Screen",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
             )),
           ),
           GridView.count(
@@ -142,10 +137,7 @@ class _SeatsState extends State<Seats> {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               "Total Cost= Rs." + total.toString(),
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
             ),
           ),
         ],

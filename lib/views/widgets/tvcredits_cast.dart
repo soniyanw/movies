@@ -38,7 +38,6 @@ class _TVCreditsCastState extends State<TVCreditsCast> {
                       ),
                       Text(
                         tvcredits[index].name ?? '',
-                        style: TextStyle(color: Colors.white),
                       )
                     ],
                   ),

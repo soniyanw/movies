@@ -1,7 +1,6 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:movies/views/widgets/app_texts.dart';
 import 'package:movies/views/widgets/bottomcontainer.dart';
 
 class BookButton extends StatefulWidget {
@@ -28,11 +27,13 @@ class _BookButtonState extends State<BookButton> {
       child: Container(
         child: Container(
             decoration: BoxDecoration(
-                color: Colors.grey[600],
-                borderRadius: BorderRadius.circular(8)),
+                color: Colors.white, borderRadius: BorderRadius.circular(8)),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextUsed("Book Ticket"),
+              child: Text(
+                "Book Ticket",
+                style: TextStyle(color: Colors.black),
+              ),
             )),
       ),
     );

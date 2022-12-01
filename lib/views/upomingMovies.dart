@@ -52,7 +52,7 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                         ),
                         Text(
                           upcommovies[index].title ?? '',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(),
                         )
                       ],
                     ),

@@ -53,7 +53,6 @@ class _MovieCreditsCastState extends State<MovieCreditsCast> {
                         ),
                         Text(
                           moviecredits[index].title ?? '',
-                          style: TextStyle(color: Colors.white),
                         )
                       ],
                     ),

@@ -28,10 +28,10 @@ class _CastDetailsState extends State<CastDetails>
     Castcredits? castdetails = context.appViewModel.state.castcredits;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        //backgroundColor: Colors.black,
         title: Text(castdetails!.name ?? ''),
       ),
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       body: Container(
         child: Column(
           children: [
@@ -104,9 +104,6 @@ class _CastDetailsState extends State<CastDetails>
               ],
             ),
             TabBar(
-              unselectedLabelColor: Colors.white,
-              labelColor: Colors.white,
-              indicatorColor: Colors.white,
               tabs: [
                 Tab(
                   text: "Movies",

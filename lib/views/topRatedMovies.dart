@@ -53,7 +53,7 @@ class _TopRatedMoviesState extends State<TopRatedMovies> {
                         ),
                         Text(
                           topmovies[index].title ?? '',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(),
                         )
                       ],
                     ),

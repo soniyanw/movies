@@ -53,7 +53,7 @@ class _PopularMoviesState extends State<PopularMovies> {
                         ),
                         Text(
                           popmovies[index].title ?? '',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(),
                         )
                       ],
                     ),

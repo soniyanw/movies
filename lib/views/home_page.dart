@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/view_model/theme_model.dart';
 import 'package:movies/views/popularmovies.dart';
 import 'package:movies/views/topRatedMovies.dart';
 import 'package:movies/views/upomingMovies.dart';
@@ -32,7 +33,6 @@ class _HomePageState extends State<HomePage>
 
   @override
   final upperTab = const TabBar(
-    labelColor: Colors.white,
     tabs: <Tab>[
       Tab(
         text: "Popular",
@@ -40,40 +40,44 @@ class _HomePageState extends State<HomePage>
       Tab(text: "Top Rated"),
       Tab(text: "Upcoming"),
     ],
-    indicatorColor: Colors.white,
   );
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-          backgroundColor: Colors.black,
-          appBar: AppBar(
-            leading: Icon(Icons.menu),
-            title: Text("Book Movie"),
-            backgroundColor: Colors.black,
-            bottom: upperTab,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Icon(Icons.search_rounded),
-              )
-            ],
-            elevation: 20,
-          ),
-          body: loading == false
-              ? TabBarView(
-                  children: [
-                    PopularMovies(),
-                    TopRatedMovies(),
-                    UpcomingMovies(),
-                  ],
+    return Consumer(builder: (context, ThemeModel themeNotifier, child) {
+      return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+            appBar: AppBar(
+              leading: Icon(Icons.menu),
+              title: Text("Book Movie"),
+              bottom: upperTab,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: IconButton(
+                      onPressed: () {
+                        themeNotifier.isDark
+                            ? themeNotifier.isDark = false
+                            : themeNotifier.isDark = true;
+                      },
+                      icon: Icon(themeNotifier.isDark
+                          ? Icons.wb_sunny
+                          : Icons.nightlight_round)),
                 )
-              : Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                  ),
-                )),
-    );
+              ],
+            ),
+            body: loading == false
+                ? TabBarView(
+                    children: [
+                      PopularMovies(),
+                      TopRatedMovies(),
+                      UpcomingMovies(),
+                    ],
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  )),
+      );
+    });
   }
 }

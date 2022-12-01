@@ -55,7 +55,7 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
     value = object.currentmovie_tv;
     if (value != null) {
       result
-        ..add('currentmovie')
+        ..add('currentmovie_tv')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(MovieDetails)));
     }
@@ -132,8 +132,8 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
                       BuiltList, const [const FullType(MovieDetails)]))!
               as BuiltList<Object?>);
           break;
-        case 'currentmovie':
-          result.currentmovie.replace(serializers.deserialize(value,
+        case 'currentmovie_tv':
+          result.currentmovie_tv.replace(serializers.deserialize(value,
               specifiedType: const FullType(MovieDetails))! as MovieDetails);
           break;
         case 'currentmoviedetails':
@@ -288,7 +288,7 @@ class _$AppState extends AppState {
           ..add('popular', popular)
           ..add('toprated', toprated)
           ..add('upcoming', upcoming)
-          ..add('currentmovie', currentmovie_tv)
+          ..add('currentmovie_tv', currentmovie_tv)
           ..add('currentmoviedetails', currentmoviedetails)
           ..add('movieid', movieid)
           ..add('castlist', castlist)
@@ -321,11 +321,11 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set upcoming(ListBuilder<MovieDetails>? upcoming) =>
       _$this._upcoming = upcoming;
 
-  MovieDetailsBuilder? _currentmovie;
-  MovieDetailsBuilder get currentmovie =>
-      _$this._currentmovie ??= new MovieDetailsBuilder();
-  set currentmovie(MovieDetailsBuilder? currentmovie) =>
-      _$this._currentmovie = currentmovie;
+  MovieDetailsBuilder? _currentmovie_tv;
+  MovieDetailsBuilder get currentmovie_tv =>
+      _$this._currentmovie_tv ??= new MovieDetailsBuilder();
+  set currentmovie_tv(MovieDetailsBuilder? currentmovie_tv) =>
+      _$this._currentmovie_tv = currentmovie_tv;
 
   CurrentmovieDetailsBuilder? _currentmoviedetails;
   CurrentmovieDetailsBuilder get currentmoviedetails =>
@@ -379,7 +379,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _popular = $v.popular?.toBuilder();
       _toprated = $v.toprated?.toBuilder();
       _upcoming = $v.upcoming?.toBuilder();
-      _currentmovie = $v.currentmovie_tv?.toBuilder();
+      _currentmovie_tv = $v.currentmovie_tv?.toBuilder();
       _currentmoviedetails = $v.currentmoviedetails?.toBuilder();
       _movieid = $v.movieid;
       _castlist = $v.castlist?.toBuilder();
@@ -415,7 +415,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               popular: _popular?.build(),
               toprated: _toprated?.build(),
               upcoming: _upcoming?.build(),
-              currentmovie_tv: _currentmovie?.build(),
+              currentmovie_tv: _currentmovie_tv?.build(),
               currentmoviedetails: _currentmoviedetails?.build(),
               movieid: movieid,
               castlist: _castlist?.build(),
@@ -433,8 +433,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
         _toprated?.build();
         _$failedField = 'upcoming';
         _upcoming?.build();
-        _$failedField = 'currentmovie';
-        _currentmovie?.build();
+        _$failedField = 'currentmovie_tv';
+        _currentmovie_tv?.build();
         _$failedField = 'currentmoviedetails';
         _currentmoviedetails?.build();
 

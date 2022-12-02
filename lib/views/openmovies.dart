@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/movie_details.dart';
@@ -80,8 +81,9 @@ class _OpenMoviesState extends State<OpenMovies> {
               height: 300,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage("https://image.tmdb.org/t/p/w500" +
-                        moviedetails.backdrop_path.toString()),
+                    image: CachedNetworkImageProvider(
+                        "https://image.tmdb.org/t/p/w500" +
+                            moviedetails.backdrop_path.toString()),
                     fit: BoxFit.cover),
               ),
             ),

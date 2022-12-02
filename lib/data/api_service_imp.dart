@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies/core/services/api_service.dart';
 import 'package:movies/model/cast.dart';
@@ -128,20 +127,6 @@ class APIServiceImp implements APIService {
       output.add(MovieDetails.fromJson(element));
     });
     return output.toBuiltList();
-  }
-
-  DecorationImage getimage(String httpimg) {
-    try {
-      return DecorationImage(
-        image: NetworkImage(
-          "https://image.tmdb.org/t/p/w500/" + httpimg.toString(),
-        ),
-        fit: BoxFit.cover,
-      );
-    } on Exception catch (e) {
-      print(e);
-      return DecorationImage(image: AssetImage('assets/noimage.jpeg'));
-    }
   }
 
   @override

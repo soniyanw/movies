@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/castcredits.dart';
 import 'package:movies/ui.dart';
@@ -38,15 +39,16 @@ class _CastDetailsState extends State<CastDetails>
             Row(
               children: [
                 Container(
-                    height: 200,
-                    width: 150,
-                    child: Image(
-                      image: NetworkImage(
-                        "https://image.tmdb.org/t/p/w500" +
-                            castdetails.profile_path.toString(),
-                      ),
-                      fit: BoxFit.cover,
-                    )),
+                  height: 200,
+                  width: 150,
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) =>
+                        Center(child: const CircularProgressIndicator()),
+                    imageUrl: "https://image.tmdb.org/t/p/w500" +
+                        castdetails.profile_path.toString(),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

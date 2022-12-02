@@ -1,4 +1,5 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/model/movie_details.dart';
 import 'package:movies/ui.dart';
@@ -43,11 +44,11 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                     child: Column(
                       children: [
                         Expanded(
-                          child: Image(
-                            image: NetworkImage(
-                              "https://image.tmdb.org/t/p/w500" +
-                                  upcommovies[index].poster_path.toString(),
-                            ),
+                          child: CachedNetworkImage(
+                            placeholder: (context, url) => Center(
+                                child: const CircularProgressIndicator()),
+                            imageUrl: "https://image.tmdb.org/t/p/w500" +
+                                upcommovies[index].poster_path.toString(),
                           ),
                         ),
                         Text(

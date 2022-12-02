@@ -1,6 +1,6 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:movies/data/api_service_imp.dart';
 import 'package:movies/model/cast.dart';
 import 'package:movies/ui.dart';
 import 'package:movies/view_model/app_view_model.dart';
@@ -37,8 +37,11 @@ class CastPage extends StatelessWidget {
                     alignment: Alignment.bottomLeft,
                     child: TextUsed(castdetails![index].name ?? '')),
                 decoration: BoxDecoration(
-                  image: APIServiceImp()
-                      .getimage(castdetails[index].profile_path.toString()),
+                  image: DecorationImage(
+                      image: CachedNetworkImageProvider(
+                          "https://image.tmdb.org/t/p/w500/" +
+                              castdetails[index].profile_path.toString()),
+                      fit: BoxFit.cover),
                 ),
               ),
             ),

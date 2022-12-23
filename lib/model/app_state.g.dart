@@ -66,6 +66,13 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(CurrentmovieDetails)));
     }
+    value = object.currenttvdetails;
+    if (value != null) {
+      result
+        ..add('currenttvdetails')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(CurrenttvDetails)));
+    }
     value = object.movieid;
     if (value != null) {
       result
@@ -141,6 +148,11 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
                   specifiedType: const FullType(CurrentmovieDetails))!
               as CurrentmovieDetails);
           break;
+        case 'currenttvdetails':
+          result.currenttvdetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(CurrenttvDetails))!
+              as CurrenttvDetails);
+          break;
         case 'movieid':
           result.movieid = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -194,6 +206,8 @@ class _$AppState extends AppState {
   @override
   final CurrentmovieDetails? currentmoviedetails;
   @override
+  final CurrenttvDetails? currenttvdetails;
+  @override
   final String? movieid;
   @override
   final BuiltList<Cast>? castlist;
@@ -217,6 +231,7 @@ class _$AppState extends AppState {
       this.upcoming,
       this.currentmovie_tv,
       this.currentmoviedetails,
+      this.currenttvdetails,
       this.movieid,
       this.castlist,
       this.seats,
@@ -247,6 +262,7 @@ class _$AppState extends AppState {
         upcoming == other.upcoming &&
         currentmovie_tv == other.currentmovie_tv &&
         currentmoviedetails == other.currentmoviedetails &&
+        currenttvdetails == other.currenttvdetails &&
         movieid == other.movieid &&
         castlist == other.castlist &&
         seats == other.seats &&
@@ -268,11 +284,13 @@ class _$AppState extends AppState {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, popular.hashCode),
-                                                toprated.hashCode),
-                                            upcoming.hashCode),
-                                        currentmovie_tv.hashCode),
-                                    currentmoviedetails.hashCode),
+                                            $jc(
+                                                $jc($jc(0, popular.hashCode),
+                                                    toprated.hashCode),
+                                                upcoming.hashCode),
+                                            currentmovie_tv.hashCode),
+                                        currentmoviedetails.hashCode),
+                                    currenttvdetails.hashCode),
                                 movieid.hashCode),
                             castlist.hashCode),
                         seats.hashCode),
@@ -290,6 +308,7 @@ class _$AppState extends AppState {
           ..add('upcoming', upcoming)
           ..add('currentmovie_tv', currentmovie_tv)
           ..add('currentmoviedetails', currentmoviedetails)
+          ..add('currenttvdetails', currenttvdetails)
           ..add('movieid', movieid)
           ..add('castlist', castlist)
           ..add('seats', seats)
@@ -332,6 +351,12 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$this._currentmoviedetails ??= new CurrentmovieDetailsBuilder();
   set currentmoviedetails(CurrentmovieDetailsBuilder? currentmoviedetails) =>
       _$this._currentmoviedetails = currentmoviedetails;
+
+  CurrenttvDetailsBuilder? _currenttvdetails;
+  CurrenttvDetailsBuilder get currenttvdetails =>
+      _$this._currenttvdetails ??= new CurrenttvDetailsBuilder();
+  set currenttvdetails(CurrenttvDetailsBuilder? currenttvdetails) =>
+      _$this._currenttvdetails = currenttvdetails;
 
   String? _movieid;
   String? get movieid => _$this._movieid;
@@ -381,6 +406,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _upcoming = $v.upcoming?.toBuilder();
       _currentmovie_tv = $v.currentmovie_tv?.toBuilder();
       _currentmoviedetails = $v.currentmoviedetails?.toBuilder();
+      _currenttvdetails = $v.currenttvdetails?.toBuilder();
       _movieid = $v.movieid;
       _castlist = $v.castlist?.toBuilder();
       _seats = $v.seats;
@@ -417,6 +443,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               upcoming: _upcoming?.build(),
               currentmovie_tv: _currentmovie_tv?.build(),
               currentmoviedetails: _currentmoviedetails?.build(),
+              currenttvdetails: _currenttvdetails?.build(),
               movieid: movieid,
               castlist: _castlist?.build(),
               seats: seats,
@@ -437,6 +464,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
         _currentmovie_tv?.build();
         _$failedField = 'currentmoviedetails';
         _currentmoviedetails?.build();
+        _$failedField = 'currenttvdetails';
+        _currenttvdetails?.build();
 
         _$failedField = 'castlist';
         _castlist?.build();

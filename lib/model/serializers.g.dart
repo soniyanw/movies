@@ -11,6 +11,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Cast.serializer)
       ..add(Castcredits.serializer)
       ..add(CurrentmovieDetails.serializer)
+      ..add(CurrenttvDetails.serializer)
       ..add(MovieDetails.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(MovieDetails)]),

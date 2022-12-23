@@ -6,6 +6,7 @@ import 'package:movies/core/services/api_service.dart';
 import 'package:movies/model/cast.dart';
 import 'package:movies/model/castcredits.dart';
 import 'package:movies/model/currentmovie_details.dart';
+import 'package:movies/model/currenttv_details.dart';
 import 'package:movies/model/movie_details.dart';
 
 class APIServiceImp implements APIService {
@@ -67,6 +68,20 @@ class APIServiceImp implements APIService {
     return output;
   }
 
+  Future<CurrenttvDetails> gettvdetails(String tvid) async {
+    // TODO: implement getmovies
+    final String request = "https://api.themoviedb.org/3/tv/" +
+        tvid +
+        "?api_key=dd86d13e65172a24cdaed08b6ed89a54&language=en-US";
+    final http.Response response = await http.get(Uri.parse(request));
+    CurrenttvDetails output;
+    final Map<String, dynamic> requestmap =
+        await json.decode(response.body) as Map<String, dynamic>;
+    output = await CurrenttvDetails.fromJson(requestmap);
+    print(output);
+    return output;
+  }
+
   Future<BuiltList<Cast>> getcastdetails(String movieId) async {
     // TODO: implement getmovies
     final String request = "https://api.themoviedb.org/3/movie/" +
@@ -77,6 +92,26 @@ class APIServiceImp implements APIService {
         await json.decode(response.body) as Map<String, dynamic>;
     List<dynamic> casts = requestmap["cast"];
     List<Cast> output = [];
+    casts.forEach((element) async {
+      output.add(Cast.fromJson(element));
+    });
+    return output.toBuiltList();
+  }
+
+  Future<BuiltList<Cast>> getcastdetails_tv(String tvid) async {
+    // TODO: implement getmovies
+    final String request = "https://api.themoviedb.org/3/tv/" +
+        tvid.toString() +
+        "/credits?api_key=dd86d13e65172a24cdaed08b6ed89a54&language=en-US";
+    final http.Response response = await http.get(Uri.parse(request));
+
+    final Map<String, dynamic> requestmap =
+        await json.decode(response.body) as Map<String, dynamic>;
+
+    List<dynamic> casts = requestmap["cast"];
+
+    List<Cast> output = [];
+
     casts.forEach((element) async {
       output.add(Cast.fromJson(element));
     });
@@ -126,6 +161,7 @@ class APIServiceImp implements APIService {
     movies.forEach((element) async {
       output.add(MovieDetails.fromJson(element));
     });
+    print(output);
     return output.toBuiltList();
   }
 

@@ -4,6 +4,7 @@ import 'package:built_value/serializer.dart';
 import 'package:movies/model/cast.dart';
 import 'package:movies/model/castcredits.dart';
 import 'package:movies/model/currentmovie_details.dart';
+import 'package:movies/model/currenttv_details.dart';
 import 'package:movies/model/movie_details.dart';
 
 import 'serializers.dart';
@@ -33,6 +34,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   BuiltList<MovieDetails>? get upcoming;
   MovieDetails? get currentmovie_tv;
   CurrentmovieDetails? get currentmoviedetails;
+  CurrenttvDetails? get currenttvdetails;
   String? get movieid;
   BuiltList<Cast>? get castlist;
   int? get seats;

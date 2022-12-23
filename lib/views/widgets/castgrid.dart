@@ -14,42 +14,44 @@ class CastPage extends StatelessWidget {
   Widget build(BuildContext context) {
     BuiltList<Cast>? castdetails = context.read<AppViewModel>().state.castlist;
 
-    return Container(
-      height: 120.0,
-      child: new ListView.builder(
-        itemCount: castdetails?.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkResponse(
-              onTap: () async {
-                await context
-                    .read<AppViewModel>()
-                    .getcastdetails_withcredits(castdetails![index].id ?? 0);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CastDetails()));
+    return (castdetails != null && castdetails.length != 0)
+        ? Container(
+            height: 120.0,
+            child: new ListView.builder(
+              itemCount: castdetails.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkResponse(
+                    onTap: () async {
+                      await context
+                          .read<AppViewModel>()
+                          .getcastdetails_withcredits(
+                              castdetails[index].id ?? 0);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CastDetails()));
+                    },
+                    child: new Container(
+                      width: 100,
+                      child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: TextUsed(castdetails[index].name ?? '')),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: CachedNetworkImageProvider(
+                                "https://image.tmdb.org/t/p/w500/" +
+                                    castdetails[index].profile_path.toString()),
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                  ),
+                );
               },
-              child: new Container(
-                width: 100,
-                child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: TextUsed(castdetails![index].name ?? '')),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                          "https://image.tmdb.org/t/p/w500/" +
-                              castdetails[index].profile_path.toString()),
-                      fit: BoxFit.cover),
-                ),
-              ),
+              scrollDirection: Axis.horizontal,
             ),
-          );
-        },
-        scrollDirection: Axis.horizontal,
-      ),
-    );
-    ;
+          )
+        : Container();
   }
 }

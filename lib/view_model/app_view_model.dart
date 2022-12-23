@@ -6,6 +6,7 @@ import 'package:movies/model/app_state.dart';
 import 'package:movies/model/cast.dart';
 import 'package:movies/model/castcredits.dart';
 import 'package:movies/model/currentmovie_details.dart';
+import 'package:movies/model/currenttv_details.dart';
 import 'package:movies/model/movie_details.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -66,6 +67,17 @@ class AppViewModel extends AppStateNotifier<AppState>
     state = state.rebuild((p0) {
       p0.currentmovie_tv = (movielist[index]).toBuilder();
       p0.currentmoviedetails = a.toBuilder();
+      p0.castlist = b.toBuilder();
+    });
+  }
+
+  Future<void> getcurrent_tv(int index, BuiltList<MovieDetails>? tvlist) async {
+    CurrenttvDetails a = await imp.gettvdetails((tvlist![index].id).toString());
+    BuiltList<Cast>? b =
+        await imp.getcastdetails_tv((tvlist[index].id).toString());
+    state = state.rebuild((p0) {
+      p0.currentmovie_tv = (tvlist[index]).toBuilder();
+      p0.currenttvdetails = a.toBuilder();
       p0.castlist = b.toBuilder();
     });
   }

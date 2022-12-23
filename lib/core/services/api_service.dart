@@ -3,6 +3,7 @@ import 'package:movies/core/services/app_service.dart';
 import 'package:movies/model/cast.dart';
 import 'package:movies/model/castcredits.dart';
 import 'package:movies/model/currentmovie_details.dart';
+import 'package:movies/model/currenttv_details.dart';
 import 'package:movies/model/movie_details.dart';
 
 abstract class APIService extends AppService {
@@ -14,4 +15,6 @@ abstract class APIService extends AppService {
   Future<Castcredits> getcastdetails_and_credits(int castid);
   Future<BuiltList<MovieDetails>> getcast_movies(int castid);
   Future<BuiltList<MovieDetails>> getcast_tvs(int castid);
+  Future<CurrenttvDetails> gettvdetails(String movieId);
+  Future<BuiltList<Cast>> getcastdetails_tv(String tvid);
 }

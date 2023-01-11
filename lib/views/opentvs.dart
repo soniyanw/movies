@@ -114,8 +114,6 @@ class _OpenTVsState extends State<OpenTVs> {
           ],
         ),
       ),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      //floatingActionButton: BookButton(),
     );
   }
 }
